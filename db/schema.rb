@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_22_080340) do
+ActiveRecord::Schema.define(version: 2018_08_27_024129) do
 
   create_table "cities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -32,22 +32,23 @@ ActiveRecord::Schema.define(version: 2018_08_22_080340) do
   end
 
   create_table "industries_jobs", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "industries_id"
-    t.bigint "jobs_id"
-    t.index ["industries_id"], name: "index_industries_jobs_on_industries_id"
-    t.index ["jobs_id"], name: "index_industries_jobs_on_jobs_id"
+    t.bigint "industry_id", null: false
+    t.bigint "job_id", null: false
+    t.index ["industry_id"], name: "index_industries_jobs_on_industry_id"
+    t.index ["job_id"], name: "index_industries_jobs_on_job_id"
   end
 
   create_table "jobs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
-    t.text "short_description"
-    t.text "long_description"
+    t.text "description"
     t.string "salary"
-    t.datetime "expiration_date"
+    t.datetime "end_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "city_id"
     t.bigint "company_id"
+    t.string "experience"
+    t.string "level"
     t.index ["city_id"], name: "index_jobs_on_city_id"
     t.index ["company_id"], name: "index_jobs_on_company_id"
     t.index ["title"], name: "index_jobs_on_title"
