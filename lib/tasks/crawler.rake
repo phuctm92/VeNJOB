@@ -1,71 +1,80 @@
 require 'open-uri'
-require 'nokogiri'
 
 namespace :crawler do
 
-  desc "get job"
-  task get_jobs: :environment do
+  task :get_jobs  do
+    @cities     = get_value_from_dropdown("location2", City)
+    @industries = get_value_from_dropdown("industry2", Industry)
+
     page = Nokogiri::HTML(open("https://careerbuilder.vn/viec-lam/tat-ca-viec-lam-vi.html"))
 
-    page.css('h3.job a').map do |link| 
+    @data = Hash.new {|h,k| h[k] = Hash.new(&h.default_proc) }
+    id = 0
+    page.css('h3.job a').map do |link|
       job_url = Nokogiri::HTML(open(URI.parse(URI.encode(link['href']))))
 
-      title = job_url.css('.top-job-info h1').text
-      next if title.blank? #skip link having different format
+      @data["job_#{id}".to_s][:title] = job_url.css('.top-job-info h1').text
+      next if @data["job_#{id}".to_s][:title].blank?
 
-      company_name = job_url.css('.top-job-info').css('.tit_company').text
-      company_addr = job_url.css('p.TitleDetailNew').css('label label').text
-
-      city_name = job_details(job_url, "Nơi làm việc: ").split(", ")
-      industry  = job_details(job_url, "Ngành nghề: ")
-      level     = job_details(job_url, "Cấp bậc: ")
-      salary    = job_details(job_url, "Lương: ")
-      exp       = job_details(job_url, "Kinh nghiệm: ")
-      end_at    = job_details(job_url, "Hết hạn nộp: ")
+      @data["job_#{id}".to_s][:company_name] = job_url.css('.top-job-info').css('.tit_company').text
+      @data["job_#{id}".to_s][:company_addr] = job_url.css('p.TitleDetailNew').css('label label').text
+      
+      @data["job_#{id}".to_s][:cities_name]  = get_details_by_span(job_url, "Nơi làm việc: ").split(", ")
+      @data["job_#{id}".to_s][:industries]   = get_details_by_span(job_url, "Ngành nghề: ").split(", ")
+      @data["job_#{id}".to_s][:level]        = get_details_by_span(job_url, "Cấp bậc: ")
+      @data["job_#{id}".to_s][:salary]       = get_details_by_span(job_url, "Lương: ")
+      @data["job_#{id}".to_s][:exp]          = get_details_by_span(job_url, "Kinh nghiệm: ")
+      @data["job_#{id}".to_s][:end_at]       = get_details_by_span(job_url, "Hết hạn nộp: ")
 
       description = ''
       job_url.css('.MarBot20').children.map do |element| 
         element.remove_attribute('class')
         description << element.to_html
       end
-
-      company = Company.find_or_create_by(name: company_name, address: company_addr)
-      city_name.each do |c|
-        city = City.find_by(name: c)
-        Job.create!(title: title, description: description, salary: salary,
-          end_at: end_at, experience: exp, level: level, company_id: company.id, city_id: city.id)
-      end
-
-      puts URI.parse(URI.encode(link['href']))
-      puts "#{title}"
-      puts "#{salary}" 
-      puts "#{level}"
-      puts "#{end_at}"
-      puts "#{city_name}"
-      puts "#{company_name} : #{company_addr}"
-      puts '-------------------------'
+      @data["job_#{id}".to_s][:description] = description
+      id += 1
     end
   end
 
 
-  task get_cities: :environment do
+  def get_value_from_dropdown(id, table)
     page = Nokogiri::HTML(open("https://careerbuilder.vn/vi/"))
-    cities = page.css('select#location2 option').map {|c|  c.text}
-    cities.shift
-    cities.each {|c| City.create(name: c)}
+    datas = page.at("select##{id}").css('option').map(&:text)
+    datas.shift
+    datas
   end
 
-  task get_industries: :environment do
-    page = Nokogiri::HTML(open("https://careerbuilder.vn/vi/"))
-    industries = page.css('select#industry2 option').map {|c| c.text}
-    industries.shift
-    industries.each { |i| Industry.create(name: i) }
-  end
-
-  def job_details(url, sections_label)
+  def get_details_by_span(url, sections_label)
     content = url.css("p:has(span:contains('#{sections_label}'))").children
     return "" if content.blank?
     content.shift
     content.text.gsub("\r\n",' ').split(' ').join(' ')
+  end
+
+  task import_data: :environment do
+    Rake::Task["crawler:get_jobs"].invoke
+    
+    @cities.each {|c| City.find_or_create_by(name: c) }
+    @industries.each {|i| Industry.find_or_create_by(name: i) }
+    @data.each do |k,v|
+      company = Company.find_or_create_by(name: @data.dig(k, :company_name)) do |c|
+        c.address = @data.dig(k, :company_addr)
+      end
+      
+      @data.dig(k, :cities_name).each do |c|
+        city = City.find_by_name(c)
+        job = Job.create(title:       @data.dig(k, :title),
+                        description:  @data.dig(k, :description),
+                        salary:       @data.dig(k, :salary),
+                        end_at:       @data.dig(k, :end_at),
+                        experience:   @data.dig(k, :exp),
+                        level:        @data.dig(k, :level),
+                        company_id:   company.id,
+                        city_id:      city.id)
+        @data.dig(k, :industries).each do |i|
+          job.industries << Industry.find_or_create_by(name: i)
+        end
+      end        
+    end
   end
 end
