@@ -1,0 +1,36 @@
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= image_tag "logo", class:"navbar-brand img-responsive" %>
+    </div>
+
+    <div id="navbar" class="navbar-collapse collapse">
+      <div class="row">
+        <div class="col-md-4 col-md-offset-6">
+          <div class="row">
+            <div class="col-md-6">
+              <%= link_to "Login", "#", class:"btn btn-default btn-block" %>
+            </div>
+            <div class="col-md-6">
+              <%= link_to "Register", "#", class:"btn btn-default btn-block" %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <%= link_to "Favorite", "#", class:"btn btn-default btn-block" %>
+            </div>
+            <div class="col-md-6">
+              <%= link_to "History", "#", class:"btn btn-default btn-block" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
