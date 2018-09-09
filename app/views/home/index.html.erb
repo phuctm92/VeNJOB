@@ -1,100 +1,26 @@
 <%= image_tag 'banner', class:"img-responsive" %>
-<div class="text-center">Total: 1000</div><hr>
+<div class="text-center total">
+  Total Jobs: <%= @total_jobs %><hr>
+</div>
 <%= render 'shared/search' %><hr>
 
 <div class="panel panel-info">
   <div class="panel-heading"><h3>Latest Jobs</h3></div>
   <div class="clearfix">
+    <% @latest_jobs.each do |job| %>      
     <div class="panel-body">
-      <div class="pull-left">
-        <h4>Job: ABC</h4>
-        <p>Company name: xxxxxxxxxxxxxxx</p>
+      <div class="row">
+        <div class="col-md-8 col-sm-8">
+          <h4 class="wrap-content"><%= job.title %></h4>
+          <p class="wrap-content"><%= job.company.name %></p>
+        </div>
+        <div class="col-md-4 sol-sm-4">
+          <p><%= fa_icon "usd" %> <%= job.salary %></p>
+          <p><%= fa_icon "map-marker" %> <%= job.city.name %></p>
+        </div>
       </div>
-      <div class="pull-right">
-        <p>1000USD</p>
-        <p>HCM</p>
-      </div>
-    </div><hr>
-    <div class="panel-body">
-      <div class="pull-left">
-        <h4>Job: ABC</h4>
-        <p>Company name: xxxxxxxxxxxxxxx</p>
-      </div>
-      <div class="pull-right">
-        <p>1000USD</p>
-        <p>HCM</p>
-      </div>
-    </div><hr>
-    <div class="panel-body">
-      <div class="pull-left">
-        <h4>Job: ABC</h4>
-        <p>Company name: xxxxxxxxxxxxxxx</p>
-      </div>
-      <div class="pull-right">
-        <p>1000USD</p>
-        <p>HCM</p>
-      </div>
-    </div><hr>
-    <div class="panel-body">
-      <div class="pull-left">
-        <h4>Job: ABC</h4>
-        <p>Company name: xxxxxxxxxxxxxxx</p>
-      </div>
-      <div class="pull-right">
-        <p>1000USD</p>
-        <p>HCM</p>
-      </div>
-    </div><hr>
-    <div class="panel-body">
-      <div class="pull-left">
-        <h4>Job: ABC</h4>
-        <p>Company name: xxxxxxxxxxxxxxx</p>
-      </div>
-      <div class="pull-right">
-        <p>1000USD</p>
-        <p>HCM</p>
-      </div>
-    </div><hr>
-    <div class="panel-body">
-      <div class="pull-left">
-        <h4>Job: ABC</h4>
-        <p>Company name: xxxxxxxxxxxxxxx</p>
-      </div>
-      <div class="pull-right">
-        <p>1000USD</p>
-        <p>HCM</p>
-      </div>
-    </div><hr>
-    <div class="panel-body">
-      <div class="pull-left">
-        <h4>Job: ABC</h4>
-        <p>Company name: xxxxxxxxxxxxxxx</p>
-      </div>
-      <div class="pull-right">
-        <p>1000USD</p>
-        <p>HCM</p>
-      </div>
-    </div><hr>
-    <div class="panel-body">
-      <div class="pull-left">
-        <h4>Job: ABC</h4>
-        <p>Company name: xxxxxxxxxxxxxxx</p>
-      </div>
-      <div class="pull-right">
-        <p>1000USD</p>
-        <p>HCM</p>
-      </div>
-    </div><hr>
-    <div class="panel-body">
-      <div class="pull-left">
-        <h4>Job: ABC</h4>
-        <p>Company name: xxxxxxxxxxxxxxx</p>
-      </div>
-      <div class="pull-right">
-        <p>1000USD</p>
-        <p>HCM</p>
-      </div>
-    </div>
+    </div><hr>  
+    <% end %>
   </div>
 </div>
 
@@ -106,22 +32,13 @@
   </div>
   <div id="collapse_cities" class="panel-collapse collapse">
     <div class="panel-body">
-      <ul class="row">
-        <li class="col-md-4 thumbnail">Ho Chi Minh (1000)</li>
-        <li class="col-md-4 thumbnail">Ho Chi Minh (1000)</li>
-        <li class="col-md-4 thumbnail">Ho Chi Minh (1000)</li>
-      </ul>
-      <ul class="row">
-        <li class="col-md-4 thumbnail">Ha Noi (1000)</li>
-        <li class="col-md-4 thumbnail">Ha Noi (1000)</li>
-        <li class="col-md-4 thumbnail">Ha Noi (1000)</li>
-      </ul>
-      <ul class="row">
-        <li class="col-md-4 thumbnail">Da Nang (1000)</li>
-        <li class="col-md-4 thumbnail">Da Nang (1000)</li>
-        <li class="col-md-4 thumbnail">Da Nang (1000)</li>
-      </ul>
-
+      <div class="row">
+      <% @cities.each do |city| %>
+        <div class="col-md-4 col-sm-6">
+          <%= city.name %> ( <%= city.jobs_count %> )
+        </div>
+      <% end %>
+      </div>
       <div class="pull-right">
         <a href="#">More...</a>
       </div>
@@ -137,22 +54,13 @@
   </div>
   <div id="collapse_industries" class="panel-collapse collapse">
     <div class="panel-body">
-      <ul class="row">
-        <li class="col-md-4 thumbnail">CNTT - Phần mềm (1000)</li>
-        <li class="col-md-4 thumbnail">CNTT - Phần mềm (1000)</li>
-        <li class="col-md-4 thumbnail">CNTT - Phần mềm (1000)</li>
-      </ul>
-      <ul class="row">
-        <li class="col-md-4 thumbnail">CNTT - Phần mềm (1000)</li>
-        <li class="col-md-4 thumbnail">CNTT - Phần mềm (1000)</li>
-        <li class="col-md-4 thumbnail">CNTT - Phần mềm (1000)</li>
-      </ul>
-      <ul class="row">
-        <li class="col-md-4 thumbnail">CNTT - Phần mềm (1000)</li>
-        <li class="col-md-4 thumbnail">CNTT - Phần mềm (1000)</li>
-        <li class="col-md-4 thumbnail">CNTT - Phần mềm (1000)</li>
-      </ul>
-
+      <div class="row">
+      <% @industries.each do |industry| %>
+        <div class="col-md-4 col-sm-6">
+          <%= industry.name %> ( <%= industry.jobs_count %> )
+        </div>
+      <% end %>
+      </div>
       <div class="pull-right">
         <a href="#">More...</a>
       </div>

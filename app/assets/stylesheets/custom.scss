@@ -29,3 +29,27 @@ body {
     margin: 0;
   }
 }
+
+.total {
+  padding-top: 20px;
+  font-size: 1.5em;
+  hr {
+    margin-top: 0;
+  }
+}
+
+.wrap-content {
+  width: 500px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+@media(min-width: $screen-sm-min) {
+  .wrap-content {
+    width: 300px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis; 
+  }  
+}

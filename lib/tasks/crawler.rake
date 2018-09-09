@@ -6,9 +6,8 @@ namespace :crawler do
     @cities     = get_value_from_dropdown("location2")
     @industries = get_value_from_dropdown("industry2")
 
-    page = 2
+    page = 10
     current_page = 1
-    job_number = 0
     id = 0
     @data = Hash.new {|h,k| h[k] = Hash.new(&h.default_proc) }
     while current_page <= page
@@ -44,12 +43,9 @@ namespace :crawler do
 
         puts "#{link['href']}"
         puts "------------------------------------------------------------------------"
-        job_number += 1
       end
       current_page += 1
     end
-    # puts job_number
-    # puts @data
   end
 
 
