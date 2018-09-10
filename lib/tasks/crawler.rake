@@ -6,7 +6,7 @@ namespace :crawler do
     @cities     = get_value_from_dropdown("location2")
     @industries = get_value_from_dropdown("industry2")
 
-    page = 10
+    page = 15
     current_page = 1
     id = 0
     @data = Hash.new {|h,k| h[k] = Hash.new(&h.default_proc) }
@@ -67,6 +67,7 @@ namespace :crawler do
     Rake::Task["crawler:get_jobs"].invoke
     
     @cities.each {|c| City.find_or_create_by(name: c) }
+    City.where('id > 70').update_all(domestic: false)
     @industries.each {|i| Industry.find_or_create_by(name: i) }
     @data.each do |k,v|
       company = Company.find_or_create_by(name: @data.dig(k, :company_name)) do |c|

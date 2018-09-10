@@ -38,9 +38,9 @@
           <%= city.name %> ( <%= city.jobs_count %> )
         </div>
       <% end %>
-      </div>
+      </div> <br>
       <div class="pull-right">
-        <a href="#">More...</a>
+        <%= link_to 'All Cities', cities_path, class:"btn btn-default"  %>
       </div>
     </div>
   </div>
@@ -60,9 +60,9 @@
           <%= industry.name %> ( <%= industry.jobs_count %> )
         </div>
       <% end %>
-      </div>
+      </div> <br>
       <div class="pull-right">
-        <a href="#">More...</a>
+        <%= link_to 'All Industries', industries_path, class:"btn btn-default"  %>
       </div>
     </div>
   </div>

@@ -1,23 +1,12 @@
 <div class="panel panel-info">
   <div class="panel-heading"><h3>Industry List</h3></div>
   <div class="panel-body">
-    <ul class="row">
-        <li class="col-md-3 col-xs-6 thumbnail">Industry 1 (1000)</li>
-        <li class="col-md-3 col-xs-6 thumbnail">Industry 2 (1000)</li>
-        <li class="col-md-3 col-xs-6 thumbnail">Industry 3 (1000)</li>
-        <li class="col-md-3 col-xs-6 thumbnail">Industry 4 (1000)</li>
-      </ul>
-      <ul class="row">
-        <li class="col-md-3 col-xs-6 thumbnail">Industry 5 (1000)</li>
-        <li class="col-md-3 col-xs-6 thumbnail">Industry 6 (1000)</li>
-        <li class="col-md-3 col-xs-6 thumbnail">Industry 7 (1000)</li>
-        <li class="col-md-3 col-xs-6 thumbnail">Industry 8 (1000)</li>
-      </ul>
-      <ul class="row">
-        <li class="col-md-3 col-xs-6 thumbnail">Industry 9 (1000)</li>
-        <li class="col-md-3 col-xs-6 thumbnail">Industry 10 (1000)</li>
-        <li class="col-md-3 col-xs-6 thumbnail">Industry 11 (1000)</li>
-        <li class="col-md-3 col-xs-6 thumbnail">Industry 12 (1000)</li>
-      </ul>
+    <div class="row">
+      <% @industries.each do |i| %>
+        <div class="col-md-4 col-sm-6">
+          <%= i.name %> ( <%= i.jobs_count %> )
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>
