@@ -6,7 +6,7 @@ namespace :crawler do
     @cities     = get_value_from_dropdown("location2")
     @industries = get_value_from_dropdown("industry2")
 
-    page = 1
+    page = 15
     current_page = 1
     id = 0
     @data = Hash.new {|h,k| h[k] = Hash.new(&h.default_proc) }
