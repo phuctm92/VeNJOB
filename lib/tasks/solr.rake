@@ -9,6 +9,7 @@ namespace :solr do
 
     Job.find_each do |job|
       solr.add(id: job.id,
+                job_id: job.id,
                 job_title: job.title,
                 job_description: strip_tags(job.description),
                 salary: job.salary,
@@ -18,7 +19,8 @@ namespace :solr do
                 company_name: job.company.name,
                 industry_id: job.industry_ids,
                 industry_name: job.industries.map(&:name),
-                min_salary: min_salary(job.salary)
+                min_salary: min_salary(job.salary),
+                domestic: job.city.domestic
                 )
       puts "Done"
     end

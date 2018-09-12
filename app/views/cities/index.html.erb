@@ -1,0 +1,43 @@
+<div class="panel panel-info">
+  <div class="panel-heading"><h3>City List</h3></div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-6 col-sm-6">
+        <%= select_tag "city",
+          options_from_collection_for_select(@vietnam, "id", "name"),
+          prompt: "Vietnam",
+          class:"form-control" %>
+      </div>
+      <div class="col-md-6 col-sm-6">
+        <%= select_tag "city",
+          options_from_collection_for_select(@international, "id", "name"),
+          prompt: "International",
+          class:"form-control" %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="panel panel-info">
+  <div class="panel-heading"><h3>Vietnam</h3></div>
+  <div class="panel-body">
+    <% @cities.each do |city| %>
+      <% city.each do |c| %>
+        <div class="col-md-3 col-sm-6">
+          <%= city[0] %> ( <%= city[1] %> )
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<div class="panel panel-info">
+  <div class="panel-heading"><h3>International</h3></div>
+  <div class="panel-body">
+    <% @inter_cities.each do |c| %>
+    <div class="col-md-3 col-sm-6">
+      <%= c.name %> ( <%= c.jobs_count%> )
+    </div>
+    <% end %>
+  </div>
+</div>
