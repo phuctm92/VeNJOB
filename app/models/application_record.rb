@@ -5,7 +5,7 @@ class ApplicationRecord < ActiveRecord::Base
     solr ||= RSolr.connect(url: Settings.solr.url)
   end
 
-  def self.top_record(table, limit, attribute)
+  def self.count(table, limit, attribute)
     solr = ApplicationRecord.solr_connection
     response = solr.get 'select', params: {
       'facet.field': "#{attribute}_id",
@@ -19,8 +19,9 @@ class ApplicationRecord < ActiveRecord::Base
     test = []
     result.each do |k,v|
       test << {id: k, name: query[k.to_i], count: v}
-      # query.each {|k1, v1| test << [v1,v] if k.to_i == k1}
     end
     test
   end
 end
+
+ 

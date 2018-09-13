@@ -1,2 +1,6 @@
+constant:
+  FACET_LIMIT: 9
+  FACET_ALL: -1
+
 solr:
   url: "http://localhost:8983/solr/venjob"

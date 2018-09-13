@@ -2,9 +2,9 @@
   <div class="panel-heading"><h3>Industry List</h3></div>
   <div class="panel-body">
     <div class="row">
-      <% @industries.each do |i| %>
+      <% @industries.each do |industry| %>
         <div class="col-md-4 col-sm-6">
-          <%= i.name %> ( <%= i.jobs_count %> )
+          <%= link_to industry[:name], '#' %> ( <%= industry[:count] %> )
         </div>
       <% end %>
     </div>

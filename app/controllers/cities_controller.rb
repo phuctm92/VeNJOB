@@ -1,7 +1,7 @@
 class CitiesController < ApplicationController
   def index
-    @vn_cities = City.with_counts.having('jobs_count >= 1').domestic
-    @inter_cities = City.with_counts.having('jobs_count >= 1').international
+    @vn_cities = City.domestic_cities(true)
+    @inter_cities = City.domestic_cities(false)
     @vietnam = City.domestic
     @international = City.international
   end
