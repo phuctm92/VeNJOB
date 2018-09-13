@@ -19,9 +19,15 @@ class Job < ApplicationRecord
     response['response']["docs"]
   end
 
-  def search_by_keyword(keyword)
+  def self.search_by_keyword(keyword)
+    str = RSolr.solr_escape("#{keyword}")
+
     response = @solr.get 'select', params: {
-      q: ""
+      q: "search_text:'#{str}'",
+      fl: "id, job_title, job_description, city_id, city_name, salary",
+      rows:100000
     }
+
+    response['response']['docs']
   end
 end

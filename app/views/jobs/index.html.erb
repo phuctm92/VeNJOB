@@ -1,3 +1,5 @@
+<p>Total: </p>
+<%= render 'shared/search' %>
 <% @jobs.each do |job| %>
   <div class="thumbnail">
     <h3><%= link_to job["job_title"], detail_path(job["id"]) %></h3>

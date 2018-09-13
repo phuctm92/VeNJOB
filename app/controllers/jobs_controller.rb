@@ -1,5 +1,6 @@
 class JobsController < ApplicationController
   def index
+    @jobs = Job.search_by_keyword(params[:search])
   end
 
   def show
@@ -19,5 +20,9 @@ class JobsController < ApplicationController
   def company
     @jobs = City.search_by_city(params[:id])
     render :index
+  end
+
+  def jobs_params
+    params.require(:job).permit(:search)
   end
 end
