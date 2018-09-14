@@ -11,7 +11,7 @@
     <div class="panel-body">
       <div class="row">
         <div class="col-md-8 col-sm-8">
-          <h4 class="wrap-content"><%= job["job_title"] %></h4>
+          <h4 class="wrap-content"><%= link_to job["job_title"], detail_path(job["id"]) %></h4>
           <p class="wrap-content"><%= job["company_name"] %></p>
         </div>
         <div class="col-md-4 sol-sm-4">

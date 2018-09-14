@@ -1,0 +1,12 @@
+<div class="page-header">
+  <div class="clearfix">
+    <div class="pull-left"><h1><%= @job.title %></h1></div>
+    <div class="pull-right"><%= link_to 'Apply', "#", class:"btn btn-primary" %></div>
+  </div>
+</div>
+<div class="thumbnail">
+  <p>Company: <%= @job.company.name %></p>
+  <p>Location: <%= @job.city.name %></p>
+  <p>Salary: <%= @job.salary %></p>
+  <p><%= raw @job.description %></p>
+</div>
