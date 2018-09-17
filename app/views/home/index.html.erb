@@ -11,7 +11,7 @@
     <div class="panel-body">
       <div class="row">
         <div class="col-md-8 col-sm-8">
-          <h4 class="wrap-content"><%= job["job_title"] %></h4>
+          <h4 class="wrap-content"><%= link_to job["job_title"], detail_path(job["id"]) %></h4>
           <p class="wrap-content"><%= job["company_name"] %></p>
         </div>
         <div class="col-md-4 sol-sm-4">
@@ -35,7 +35,7 @@
       <div class="row">
       <% @cities.each do |city| %>
         <div class="col-md-4 col-sm-6">
-          <%= city[:name] %> ( <%= city[:count] %> )
+          <%= link_to city[:name], city_jobs_path(city[:id]) %> ( <%= city[:count] %> )
         </div>
       <% end %>
       </div> <br>
@@ -57,7 +57,8 @@
       <div class="row">
       <% @industries.each do |industry| %>
         <div class="col-md-4 col-sm-6">
-          <%= industry[:name] %> ( <%= industry[:count] %> )
+          <%= link_to industry[:name], industry_jobs_path(industry[:id]) %> 
+          ( <%= industry[:count] %> )
         </div>
       <% end %>
       </div> <br>

@@ -1,0 +1,10 @@
+<% @jobs.each do |job| %>
+  <div class="thumbnail">
+    <h3><%= link_to job["job_title"], detail_path(job["id"]) %></h3>
+    <p>Description: <%= truncate raw(job["job_description"]), length: 50 %></p>
+    <div class="clearfix">
+      <p class="pull-left">Location: <%= job["city_name"] %></p>
+      <p class="pull-right">Salary: <%= job["salary"] %></p>
+    </div>
+  </div>
+<% end %>

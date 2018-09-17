@@ -1,0 +1,8 @@
+<div class="thumbnail">
+  <h1>Title: <%= link_to job.title, detail_path(job) %></h1>
+  <p>Description: <%= raw job.description %></p>
+  <div class="clearfix">
+    <p class="pull-left">Location: <%= job.city.name %></p>
+    <p class="pull-right">Salary: <%= job.salary %></p>
+  </div>
+</div>

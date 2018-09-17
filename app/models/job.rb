@@ -14,8 +14,14 @@ class Job < ApplicationRecord
     response = @solr.get 'select', params: { 
       q: '*:*',
       sort: 'job_id desc',
-      fl: 'job_title, salary, company_name, city_name'
+      fl: 'id, job_title, salary, company_id, company_name, city_id, city_name'
     }
     response['response']["docs"]
+  end
+
+  def search_by_keyword(keyword)
+    response = @solr.get 'select', params: {
+      q: ""
+    }
   end
 end
