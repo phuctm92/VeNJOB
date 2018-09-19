@@ -4,9 +4,11 @@
     <div class="pull-right"><%= link_to 'Apply', "#", class:"btn btn-primary" %></div>
   </div>
 </div>
-<div class="thumbnail">
-  <p>Company: <%= @job.company.name %></p>
-  <p>Location: <%= @job.city.name %></p>
-  <p>Salary: <%= @job.salary %></p>
+<div class="well">
+  <h4>Company: <%= @job.company.name %></h4>
+  <div class="row">
+    <h4 class="col-md-4">Location: <%= @job.city.name %></h4>
+    <h4 class="col-md-4">Salary: <%= @job.salary %></h4>
+  </div>
   <p><%= raw @job.description %></p>
 </div>

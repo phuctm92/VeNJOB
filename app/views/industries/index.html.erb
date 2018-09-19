@@ -4,7 +4,7 @@
     <div class="row">
       <% @industries.each do |industry| %>
         <div class="col-md-4 col-sm-6">
-          <%= link_to industry[:name], '#' %> ( <%= industry[:count] %> )
+          <%= link_to industry[:name], industry_jobs_path(industry[:id]) %> ( <%= industry[:count] %> )
         </div>
       <% end %>
     </div>

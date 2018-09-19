@@ -2,7 +2,7 @@
 <div class="text-center total">
   Total Jobs: <%= @total_jobs %><hr>
 </div>
-<%= render 'shared/search' %><hr>
+<%= render 'shared/search', city: @select_city, industry: @select_industry %><hr>
 
 <div class="panel panel-info">
   <div class="panel-heading"><h3>Latest Jobs</h3></div>

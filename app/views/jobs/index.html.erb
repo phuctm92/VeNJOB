@@ -1,5 +1,10 @@
-<p>Total: </p>
-<%= render 'shared/search' %>
+<h4>Total: <%= @total %></h4>
+<h4>Result for: "<%= @keyword %>"</h4>
+
+<%= render 'shared/search', city: @select_city, industry: @select_industry %>
+
+<%= paginate @jobs %>
+
 <% @jobs.each do |job| %>
   <div class="thumbnail">
     <h3><%= link_to job["job_title"], detail_path(job["id"]) %></h3>

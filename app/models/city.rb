@@ -1,8 +1,8 @@
 class City < ApplicationRecord
   has_many :jobs
 
-  scope :domestic, -> {City.where(domestic: true)}
-  scope :international, -> {City.where(domestic: false)}
+  scope :domestic, -> { where(domestic: true) }
+  scope :international, -> { where(domestic: false) }
 
   @solr = ApplicationRecord.solr_connection
 
@@ -48,7 +48,5 @@ class City < ApplicationRecord
       fl: "id, job_title, job_description, city_id, city_name, salary",
       rows:100000
     }
-
-    response['response']['docs']
   end
 end

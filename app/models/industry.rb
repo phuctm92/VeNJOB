@@ -46,7 +46,5 @@ class Industry < ApplicationRecord
       fl: "id, job_title, job_description, city_id, city_name, salary",
       rows:100000
     }
-
-    response['response']['docs']
   end
 end

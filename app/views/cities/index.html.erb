@@ -23,7 +23,7 @@
   <div class="panel-body">
     <% @vn_cities.each do |city| %>
       <div class="col-md-3 col-sm-6">
-        <%= link_to city[:name], "#" %> ( <%= city[:count] %> )
+        <%= link_to city[:name], city_jobs_path(city[:id]) %> ( <%= city[:count] %> )
       </div>
     <% end %>
   </div>
@@ -35,7 +35,7 @@
   <div class="panel-body">
     <% @inter_cities.each do |city| %>
       <div class="col-md-3 col-sm-6">
-        <%= link_to city[:name], "#" %> ( <%= city[:count] %> )
+        <%= link_to city[:name], city_jobs_path(city[:id]) %> ( <%= city[:count] %> )
       </div>
     <% end %>
   </div>
